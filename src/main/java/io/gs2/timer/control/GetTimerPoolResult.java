@@ -1,5 +1,7 @@
 package io.gs2.timer.control;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.gs2.timer.model.TimerPool;
 
 /**
@@ -8,6 +10,7 @@ import io.gs2.timer.model.TimerPool;
  * @author Game Server Services, Inc.
  *
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class GetTimerPoolResult {
 
 	/** タイマープール */

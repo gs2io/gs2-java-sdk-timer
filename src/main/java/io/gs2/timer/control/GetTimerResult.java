@@ -1,5 +1,7 @@
 package io.gs2.timer.control;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.gs2.timer.model.Timer;
 
 /**
@@ -8,6 +10,7 @@ import io.gs2.timer.model.Timer;
  * @author Game Server Services, Inc.
  *
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class GetTimerResult {
 
 	/** タイマー */
