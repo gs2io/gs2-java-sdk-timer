@@ -1,12 +1,28 @@
+/*
+ * Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
+ * Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package io.gs2.timer.model;
 
+import java.util.List;
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * タイマープール
- * 
+ *
  * @author Game Server Services, Inc.
  *
  */
@@ -14,65 +30,73 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TimerPool implements Serializable {
 
-	/** タイマープールID */
-	String timerPoolId;
-	/** オーナーID */
-	String ownerId;
-	/** タイマープール名 */
-	String name;
+	/** 作成日時(エポック秒) */
+	private Integer createAt;
+
 	/** 説明文 */
-	String description;
-	/** 作成日時 */
-	Long createAt;
-	
+	private String description;
+
+	/** タイマープール名 */
+	private String name;
+
+	/** オーナーID */
+	private String ownerId;
+
+	/** 最終更新日時(エポック秒) */
+	private Integer updateAt;
+
+	/** タイマープールGRN */
+	private String timerPoolId;
+
+
 	/**
-	 * タイマープールIDを取得
-	 * 
-	 * @return タイマープールID
+	 * 作成日時(エポック秒)を取得
+	 *
+	 * @return 作成日時(エポック秒)
 	 */
-	public String getTimerPoolId() {
-		return timerPoolId;
+	public Integer getCreateAt() {
+		return createAt;
 	}
-	
+
 	/**
-	 * タイマープールIDを設定
-	 * 
-	 * @param timerPoolId タイマープールID
+	 * 作成日時(エポック秒)を設定
+	 *
+	 * @param createAt 作成日時(エポック秒)
 	 */
-	public void setTimerPoolId(String timerPoolId) {
-		this.timerPoolId = timerPoolId;
+	public void setCreateAt(Integer createAt) {
+		this.createAt = createAt;
 	}
-	
+
 	/**
-	 * オーナーIDを取得
-	 * 
-	 * @return オーナーID
+	 * 説明文を取得
+	 *
+	 * @return 説明文
 	 */
-	public String getOwnerId() {
-		return ownerId;
+	public String getDescription() {
+		return description;
 	}
-	
+
 	/**
-	 * オーナーIDを設定
-	 * 
-	 * @param ownerId オーナーID
+	 * 説明文を設定
+	 *
+	 * @param description 説明文
 	 */
-	public void setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	
+
 	/**
 	 * タイマープール名を取得
-	 * 
+	 *
 	 * @return タイマープール名
 	 */
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * タイマープール名を設定
-	 * 
+	 *
 	 * @param name タイマープール名
 	 */
 	public void setName(String name) {
@@ -80,49 +104,57 @@ public class TimerPool implements Serializable {
 	}
 
 	/**
-	 * 説明文を取得。
-	 * 
-	 * @return 説明文
+	 * オーナーIDを取得
+	 *
+	 * @return オーナーID
 	 */
-	public String getDescription() {
-		return description;
+	public String getOwnerId() {
+		return ownerId;
 	}
-	
+
 	/**
-	 * 説明文を設定。
-	 * 
-	 * @param description 説明文
+	 * オーナーIDを設定
+	 *
+	 * @param ownerId オーナーID
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
 	}
-	
+
 	/**
-	 * 説明文を設定。
-	 * 
-	 * @param description 説明文
-	 * @return this
+	 * 最終更新日時(エポック秒)を取得
+	 *
+	 * @return 最終更新日時(エポック秒)
 	 */
-	public TimerPool withDescription(String description) {
-		setDescription(description);
-		return this;
+	public Integer getUpdateAt() {
+		return updateAt;
 	}
-	
+
 	/**
-	 * 作成日時を取得
-	 * 
-	 * @return 作成日時
+	 * 最終更新日時(エポック秒)を設定
+	 *
+	 * @param updateAt 最終更新日時(エポック秒)
 	 */
-	public Long getCreateAt() {
-		return createAt;
+	public void setUpdateAt(Integer updateAt) {
+		this.updateAt = updateAt;
 	}
-	
+
 	/**
-	 * 作成日時を設定
-	 * 
-	 * @param createAt 作成日時
+	 * タイマープールGRNを取得
+	 *
+	 * @return タイマープールGRN
 	 */
-	public void setCreateAt(Long createAt) {
-		this.createAt = createAt;
+	public String getTimerPoolId() {
+		return timerPoolId;
 	}
+
+	/**
+	 * タイマープールGRNを設定
+	 *
+	 * @param timerPoolId タイマープールGRN
+	 */
+	public void setTimerPoolId(String timerPoolId) {
+		this.timerPoolId = timerPoolId;
+	}
+
 }

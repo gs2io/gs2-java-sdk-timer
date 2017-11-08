@@ -1,13 +1,28 @@
+/*
+ * Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
+ * Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package io.gs2.timer.control;
 
-import io.gs2.control.Gs2BasicRequest;
+import org.json.JSONObject;
+import java.util.List;
 import io.gs2.timer.Gs2Timer;
+import io.gs2.control.Gs2BasicRequest;
 
 /**
- * タイマーの削除リクエスト。
- * 
  * @author Game Server Services, Inc.
- *
  */
 @SuppressWarnings("serial")
 public class DeleteTimerRequest extends Gs2BasicRequest<DeleteTimerRequest> {
@@ -16,65 +31,69 @@ public class DeleteTimerRequest extends Gs2BasicRequest<DeleteTimerRequest> {
 		public static final String FUNCTION = "DeleteTimer";
 	}
 
-	/** タイマープール名 */
-	String timerPoolName;
-	/** タイマーID */
-	String timerId;
+	/** タイマープールの名前を指定します。 */
+	private String timerPoolName;
+
+	/** タイマーIDを指定します。 */
+	private String timerId;
+
 
 	/**
-	 * タイマープール名を取得。
-	 * 
-	 * @return タイマープール名
+	 * タイマープールの名前を指定します。を取得
+	 *
+	 * @return タイマープールの名前を指定します。
 	 */
 	public String getTimerPoolName() {
 		return timerPoolName;
 	}
-	
+
 	/**
-	 * タイマープール名を設定。
-	 * 
-	 * @param timerPoolName タイマープール名
+	 * タイマープールの名前を指定します。を設定
+	 *
+	 * @param timerPoolName タイマープールの名前を指定します。
 	 */
 	public void setTimerPoolName(String timerPoolName) {
 		this.timerPoolName = timerPoolName;
 	}
-	
+
 	/**
-	 * タイマープール名を設定。
-	 * 
-	 * @param timerPoolName タイマープール名
+	 * タイマープールの名前を指定します。を設定
+	 *
+	 * @param timerPoolName タイマープールの名前を指定します。
 	 * @return this
 	 */
 	public DeleteTimerRequest withTimerPoolName(String timerPoolName) {
 		setTimerPoolName(timerPoolName);
 		return this;
 	}
+
 	/**
-	 * タイマーIDを取得。
-	 * 
-	 * @return タイマーID
+	 * タイマーIDを指定します。を取得
+	 *
+	 * @return タイマーIDを指定します。
 	 */
 	public String getTimerId() {
 		return timerId;
 	}
-	
+
 	/**
-	 * タイマーIDを設定。
-	 * 
-	 * @param timerId タイマーID
+	 * タイマーIDを指定します。を設定
+	 *
+	 * @param timerId タイマーIDを指定します。
 	 */
 	public void setTimerId(String timerId) {
 		this.timerId = timerId;
 	}
-	
+
 	/**
-	 * タイマーIDを設定。
-	 * 
-	 * @param timerId タイマーID
+	 * タイマーIDを指定します。を設定
+	 *
+	 * @param timerId タイマーIDを指定します。
 	 * @return this
 	 */
 	public DeleteTimerRequest withTimerId(String timerId) {
 		setTimerId(timerId);
 		return this;
 	}
+
 }

@@ -1,13 +1,28 @@
+/*
+ * Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
+ * Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package io.gs2.timer.control;
 
-import io.gs2.control.Gs2BasicRequest;
+import org.json.JSONObject;
+import java.util.List;
 import io.gs2.timer.Gs2Timer;
+import io.gs2.control.Gs2BasicRequest;
 
 /**
- * タイマーの作成リクエスト。
- * 
  * @author Game Server Services, Inc.
- *
  */
 @SuppressWarnings("serial")
 public class CreateTimerRequest extends Gs2BasicRequest<CreateTimerRequest> {
@@ -16,41 +31,47 @@ public class CreateTimerRequest extends Gs2BasicRequest<CreateTimerRequest> {
 		public static final String FUNCTION = "CreateTimer";
 	}
 
-	/** タイマープール名 */
-	String timerPoolName;
-	/** コールバックメソッド */
-	String callbackMethod;
-	/** コールバックURL */
-	String callbackUrl;
-	/** コールバックボディ */
-	String callbackBody;
-	/** 実行時間 */
-	Long executeTime;
+	/** タイマープールの名前を指定します。 */
+	private String timerPoolName;
+
+	/** コールバックに利用するHTTPメソッド */
+	private String callbackMethod;
+
+	/** コールバックを実行するタイムスタンプ */
+	private Integer executeTime;
+
 	/** 最大リトライ回数 */
-	Integer retryMax;
+	private Integer retryMax;
+
+	/** method に PUT/POST を指定したときに利用するリクエストボディ */
+	private String callbackBody;
+
+	/** コールバック先のURL */
+	private String callbackUrl;
+
 
 	/**
-	 * タイマープール名を取得。
-	 * 
-	 * @return タイマープール名
+	 * タイマープールの名前を指定します。を取得
+	 *
+	 * @return タイマープールの名前を指定します。
 	 */
 	public String getTimerPoolName() {
 		return timerPoolName;
 	}
-	
+
 	/**
-	 * タイマープール名を設定。
-	 * 
-	 * @param timerPoolName タイマープール名
+	 * タイマープールの名前を指定します。を設定
+	 *
+	 * @param timerPoolName タイマープールの名前を指定します。
 	 */
 	public void setTimerPoolName(String timerPoolName) {
 		this.timerPoolName = timerPoolName;
 	}
-	
+
 	/**
-	 * タイマープール名を設定。
-	 * 
-	 * @param timerPoolName タイマープール名
+	 * タイマープールの名前を指定します。を設定
+	 *
+	 * @param timerPoolName タイマープールの名前を指定します。
 	 * @return this
 	 */
 	public CreateTimerRequest withTimerPoolName(String timerPoolName) {
@@ -59,27 +80,27 @@ public class CreateTimerRequest extends Gs2BasicRequest<CreateTimerRequest> {
 	}
 
 	/**
-	 * コールバックメソッドを取得。
-	 * 
-	 * @return コールバックメソッド
+	 * コールバックに利用するHTTPメソッドを取得
+	 *
+	 * @return コールバックに利用するHTTPメソッド
 	 */
 	public String getCallbackMethod() {
 		return callbackMethod;
 	}
-	
+
 	/**
-	 * コールバックメソッドを設定。
-	 * 
-	 * @param callbackMethod コールバックメソッド
+	 * コールバックに利用するHTTPメソッドを設定
+	 *
+	 * @param callbackMethod コールバックに利用するHTTPメソッド
 	 */
 	public void setCallbackMethod(String callbackMethod) {
 		this.callbackMethod = callbackMethod;
 	}
-	
+
 	/**
-	 * コールバックメソッドを設定。
-	 * 
-	 * @param callbackMethod コールバックメソッド
+	 * コールバックに利用するHTTPメソッドを設定
+	 *
+	 * @param callbackMethod コールバックに利用するHTTPメソッド
 	 * @return this
 	 */
 	public CreateTimerRequest withCallbackMethod(String callbackMethod) {
@@ -88,56 +109,85 @@ public class CreateTimerRequest extends Gs2BasicRequest<CreateTimerRequest> {
 	}
 
 	/**
-	 * コールバックURLを取得。
-	 * 
-	 * @return コールバックURL
+	 * コールバックを実行するタイムスタンプを取得
+	 *
+	 * @return コールバックを実行するタイムスタンプ
 	 */
-	public String getCallbackUrl() {
-		return callbackUrl;
+	public Integer getExecuteTime() {
+		return executeTime;
 	}
-	
+
 	/**
-	 * コールバックURLを設定。
-	 * 
-	 * @param callbackUrl コールバックURL
+	 * コールバックを実行するタイムスタンプを設定
+	 *
+	 * @param executeTime コールバックを実行するタイムスタンプ
 	 */
-	public void setCallbackUrl(String callbackUrl) {
-		this.callbackUrl = callbackUrl;
+	public void setExecuteTime(Integer executeTime) {
+		this.executeTime = executeTime;
 	}
-	
+
 	/**
-	 * コールバックURLを設定。
-	 * 
-	 * @param callbackUrl コールバックURL
+	 * コールバックを実行するタイムスタンプを設定
+	 *
+	 * @param executeTime コールバックを実行するタイムスタンプ
 	 * @return this
 	 */
-	public CreateTimerRequest withCallbackUrl(String callbackUrl) {
-		setCallbackUrl(callbackUrl);
+	public CreateTimerRequest withExecuteTime(Integer executeTime) {
+		setExecuteTime(executeTime);
 		return this;
 	}
 
 	/**
-	 * コールバックボディを取得。
-	 * 
-	 * @return コールバックボディ
+	 * 最大リトライ回数を取得
+	 *
+	 * @return 最大リトライ回数
+	 */
+	public Integer getRetryMax() {
+		return retryMax;
+	}
+
+	/**
+	 * 最大リトライ回数を設定
+	 *
+	 * @param retryMax 最大リトライ回数
+	 */
+	public void setRetryMax(Integer retryMax) {
+		this.retryMax = retryMax;
+	}
+
+	/**
+	 * 最大リトライ回数を設定
+	 *
+	 * @param retryMax 最大リトライ回数
+	 * @return this
+	 */
+	public CreateTimerRequest withRetryMax(Integer retryMax) {
+		setRetryMax(retryMax);
+		return this;
+	}
+
+	/**
+	 * method に PUT/POST を指定したときに利用するリクエストボディを取得
+	 *
+	 * @return method に PUT/POST を指定したときに利用するリクエストボディ
 	 */
 	public String getCallbackBody() {
 		return callbackBody;
 	}
-	
+
 	/**
-	 * コールバックボディを設定。
-	 * 
-	 * @param callbackBody コールバックボディ
+	 * method に PUT/POST を指定したときに利用するリクエストボディを設定
+	 *
+	 * @param callbackBody method に PUT/POST を指定したときに利用するリクエストボディ
 	 */
 	public void setCallbackBody(String callbackBody) {
 		this.callbackBody = callbackBody;
 	}
-	
+
 	/**
-	 * コールバックボディを設定。
-	 * 
-	 * @param callbackBody コールバックボディ
+	 * method に PUT/POST を指定したときに利用するリクエストボディを設定
+	 *
+	 * @param callbackBody method に PUT/POST を指定したときに利用するリクエストボディ
 	 * @return this
 	 */
 	public CreateTimerRequest withCallbackBody(String callbackBody) {
@@ -146,61 +196,32 @@ public class CreateTimerRequest extends Gs2BasicRequest<CreateTimerRequest> {
 	}
 
 	/**
-	 * 実行時間を取得。
-	 * 
-	 * @return 実行時間
+	 * コールバック先のURLを取得
+	 *
+	 * @return コールバック先のURL
 	 */
-	public Long getExecuteTime() {
-		return executeTime;
-	}
-	
-	/**
-	 * 実行時間を設定。
-	 * 
-	 * @param executeTime 実行時間
-	 */
-	public void setExecuteTime(Long executeTime) {
-		this.executeTime = executeTime;
-	}
-	
-	/**
-	 * 実行時間を設定。
-	 * 
-	 * @param executeTime 実行時間
-	 * @return this
-	 */
-	public CreateTimerRequest withExecuteTime(Long executeTime) {
-		setExecuteTime(executeTime);
-		return this;
+	public String getCallbackUrl() {
+		return callbackUrl;
 	}
 
 	/**
-	 * 最大リトライ回数を取得。
-	 * 
-	 * @return 最大リトライ回数
+	 * コールバック先のURLを設定
+	 *
+	 * @param callbackUrl コールバック先のURL
 	 */
-	public Integer getRetryMax() {
-		return retryMax;
+	public void setCallbackUrl(String callbackUrl) {
+		this.callbackUrl = callbackUrl;
 	}
-	
+
 	/**
-	 * 最大リトライ回数を設定。
-	 * 
-	 * @param retryMax 最大リトライ回数
-	 */
-	public void setRetryMax(Integer retryMax) {
-		this.retryMax = retryMax;
-	}
-	
-	/**
-	 * 最大リトライ回数を設定。
-	 * 
-	 * @param retryMax 最大リトライ回数
+	 * コールバック先のURLを設定
+	 *
+	 * @param callbackUrl コールバック先のURL
 	 * @return this
 	 */
-	public CreateTimerRequest withRetryMax(Integer retryMax) {
-		setRetryMax(retryMax);
+	public CreateTimerRequest withCallbackUrl(String callbackUrl) {
+		setCallbackUrl(callbackUrl);
 		return this;
 	}
-	
+
 }
