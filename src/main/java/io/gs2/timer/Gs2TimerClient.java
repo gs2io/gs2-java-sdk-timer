@@ -44,7 +44,7 @@ import io.gs2.timer.control.*;
  */
 public class Gs2TimerClient extends AbstractGs2Client<Gs2TimerClient> {
 
-	public static String ENDPOINT = "jobQueue";
+	public static String ENDPOINT = "timer";
 
 	/**
 	 * コンストラクタ。
@@ -86,7 +86,7 @@ public class Gs2TimerClient extends AbstractGs2Client<Gs2TimerClient> {
         if(request.getCallbackBody() != null) body.put("callbackBody", request.getCallbackBody());
         if(request.getRetryMax() != null) body.put("retryMax", request.getRetryMax());
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "/jobQueue",
+				Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "/timer",
 				credential,
 				ENDPOINT,
 				CreateTimerRequest.Constant.MODULE,
@@ -145,7 +145,7 @@ public class Gs2TimerClient extends AbstractGs2Client<Gs2TimerClient> {
 
 	public void deleteTimer(DeleteTimerRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "/jobQueue/" + (request.getTimerId() == null || request.getTimerId().equals("") ? "null" : request.getTimerId()) + "";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "/timer/" + (request.getTimerId() == null || request.getTimerId().equals("") ? "null" : request.getTimerId()) + "";
 
 
 
@@ -207,7 +207,7 @@ public class Gs2TimerClient extends AbstractGs2Client<Gs2TimerClient> {
 
 	public DescribeTimerResult describeTimer(DescribeTimerRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "/jobQueue";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "/timer";
 
         List<NameValuePair> queryString = new ArrayList<>();
         if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
@@ -283,7 +283,7 @@ public class Gs2TimerClient extends AbstractGs2Client<Gs2TimerClient> {
 
 	public GetTimerResult getTimer(GetTimerRequest request) {
 
-	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "/jobQueue/" + (request.getTimerId() == null || request.getTimerId().equals("") ? "null" : request.getTimerId()) + "";
+	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "/timer/" + (request.getTimerId() == null || request.getTimerId().equals("") ? "null" : request.getTimerId()) + "";
 
 
 
