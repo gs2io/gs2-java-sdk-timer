@@ -34,7 +34,7 @@ public class UpdateTimerPoolRequest extends Gs2BasicRequest<UpdateTimerPoolReque
 	/** タイマープールの名前を指定します。 */
 	private String timerPoolName;
 
-	/** タイマープールの説明 */
+	/** 説明文 */
 	private String description;
 
 
@@ -68,27 +68,27 @@ public class UpdateTimerPoolRequest extends Gs2BasicRequest<UpdateTimerPoolReque
 	}
 
 	/**
-	 * タイマープールの説明を取得
+	 * 説明文を取得
 	 *
-	 * @return タイマープールの説明
+	 * @return 説明文
 	 */
 	public String getDescription() {
 		return description;
 	}
 
 	/**
-	 * タイマープールの説明を設定
+	 * 説明文を設定
 	 *
-	 * @param description タイマープールの説明
+	 * @param description 説明文
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
-	 * タイマープールの説明を設定
+	 * 説明文を設定
 	 *
-	 * @param description タイマープールの説明
+	 * @param description 説明文
 	 * @return this
 	 */
 	public UpdateTimerPoolRequest withDescription(String description) {

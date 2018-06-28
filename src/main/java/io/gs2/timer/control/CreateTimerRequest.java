@@ -34,20 +34,20 @@ public class CreateTimerRequest extends Gs2BasicRequest<CreateTimerRequest> {
 	/** タイマープールの名前を指定します。 */
 	private String timerPoolName;
 
-	/** コールバックに利用するHTTPメソッド */
+	/** コールバックHTTPメソッド */
 	private String callbackMethod;
 
-	/** コールバックを実行するタイムスタンプ */
+	/** コールバックURL */
+	private String callbackUrl;
+
+	/** コールバックボディ(PUT/POSTのときのみ有効) */
+	private String callbackBody;
+
+	/** コールバック時間(エポック秒) */
 	private Integer executeTime;
 
 	/** 最大リトライ回数 */
 	private Integer retryMax;
-
-	/** method に PUT/POST を指定したときに利用するリクエストボディ */
-	private String callbackBody;
-
-	/** コールバック先のURL */
-	private String callbackUrl;
 
 
 	/**
@@ -80,27 +80,27 @@ public class CreateTimerRequest extends Gs2BasicRequest<CreateTimerRequest> {
 	}
 
 	/**
-	 * コールバックに利用するHTTPメソッドを取得
+	 * コールバックHTTPメソッドを取得
 	 *
-	 * @return コールバックに利用するHTTPメソッド
+	 * @return コールバックHTTPメソッド
 	 */
 	public String getCallbackMethod() {
 		return callbackMethod;
 	}
 
 	/**
-	 * コールバックに利用するHTTPメソッドを設定
+	 * コールバックHTTPメソッドを設定
 	 *
-	 * @param callbackMethod コールバックに利用するHTTPメソッド
+	 * @param callbackMethod コールバックHTTPメソッド
 	 */
 	public void setCallbackMethod(String callbackMethod) {
 		this.callbackMethod = callbackMethod;
 	}
 
 	/**
-	 * コールバックに利用するHTTPメソッドを設定
+	 * コールバックHTTPメソッドを設定
 	 *
-	 * @param callbackMethod コールバックに利用するHTTPメソッド
+	 * @param callbackMethod コールバックHTTPメソッド
 	 * @return this
 	 */
 	public CreateTimerRequest withCallbackMethod(String callbackMethod) {
@@ -109,27 +109,85 @@ public class CreateTimerRequest extends Gs2BasicRequest<CreateTimerRequest> {
 	}
 
 	/**
-	 * コールバックを実行するタイムスタンプを取得
+	 * コールバックURLを取得
 	 *
-	 * @return コールバックを実行するタイムスタンプ
+	 * @return コールバックURL
+	 */
+	public String getCallbackUrl() {
+		return callbackUrl;
+	}
+
+	/**
+	 * コールバックURLを設定
+	 *
+	 * @param callbackUrl コールバックURL
+	 */
+	public void setCallbackUrl(String callbackUrl) {
+		this.callbackUrl = callbackUrl;
+	}
+
+	/**
+	 * コールバックURLを設定
+	 *
+	 * @param callbackUrl コールバックURL
+	 * @return this
+	 */
+	public CreateTimerRequest withCallbackUrl(String callbackUrl) {
+		setCallbackUrl(callbackUrl);
+		return this;
+	}
+
+	/**
+	 * コールバックボディ(PUT/POSTのときのみ有効)を取得
+	 *
+	 * @return コールバックボディ(PUT/POSTのときのみ有効)
+	 */
+	public String getCallbackBody() {
+		return callbackBody;
+	}
+
+	/**
+	 * コールバックボディ(PUT/POSTのときのみ有効)を設定
+	 *
+	 * @param callbackBody コールバックボディ(PUT/POSTのときのみ有効)
+	 */
+	public void setCallbackBody(String callbackBody) {
+		this.callbackBody = callbackBody;
+	}
+
+	/**
+	 * コールバックボディ(PUT/POSTのときのみ有効)を設定
+	 *
+	 * @param callbackBody コールバックボディ(PUT/POSTのときのみ有効)
+	 * @return this
+	 */
+	public CreateTimerRequest withCallbackBody(String callbackBody) {
+		setCallbackBody(callbackBody);
+		return this;
+	}
+
+	/**
+	 * コールバック時間(エポック秒)を取得
+	 *
+	 * @return コールバック時間(エポック秒)
 	 */
 	public Integer getExecuteTime() {
 		return executeTime;
 	}
 
 	/**
-	 * コールバックを実行するタイムスタンプを設定
+	 * コールバック時間(エポック秒)を設定
 	 *
-	 * @param executeTime コールバックを実行するタイムスタンプ
+	 * @param executeTime コールバック時間(エポック秒)
 	 */
 	public void setExecuteTime(Integer executeTime) {
 		this.executeTime = executeTime;
 	}
 
 	/**
-	 * コールバックを実行するタイムスタンプを設定
+	 * コールバック時間(エポック秒)を設定
 	 *
-	 * @param executeTime コールバックを実行するタイムスタンプ
+	 * @param executeTime コールバック時間(エポック秒)
 	 * @return this
 	 */
 	public CreateTimerRequest withExecuteTime(Integer executeTime) {
@@ -163,64 +221,6 @@ public class CreateTimerRequest extends Gs2BasicRequest<CreateTimerRequest> {
 	 */
 	public CreateTimerRequest withRetryMax(Integer retryMax) {
 		setRetryMax(retryMax);
-		return this;
-	}
-
-	/**
-	 * method に PUT/POST を指定したときに利用するリクエストボディを取得
-	 *
-	 * @return method に PUT/POST を指定したときに利用するリクエストボディ
-	 */
-	public String getCallbackBody() {
-		return callbackBody;
-	}
-
-	/**
-	 * method に PUT/POST を指定したときに利用するリクエストボディを設定
-	 *
-	 * @param callbackBody method に PUT/POST を指定したときに利用するリクエストボディ
-	 */
-	public void setCallbackBody(String callbackBody) {
-		this.callbackBody = callbackBody;
-	}
-
-	/**
-	 * method に PUT/POST を指定したときに利用するリクエストボディを設定
-	 *
-	 * @param callbackBody method に PUT/POST を指定したときに利用するリクエストボディ
-	 * @return this
-	 */
-	public CreateTimerRequest withCallbackBody(String callbackBody) {
-		setCallbackBody(callbackBody);
-		return this;
-	}
-
-	/**
-	 * コールバック先のURLを取得
-	 *
-	 * @return コールバック先のURL
-	 */
-	public String getCallbackUrl() {
-		return callbackUrl;
-	}
-
-	/**
-	 * コールバック先のURLを設定
-	 *
-	 * @param callbackUrl コールバック先のURL
-	 */
-	public void setCallbackUrl(String callbackUrl) {
-		this.callbackUrl = callbackUrl;
-	}
-
-	/**
-	 * コールバック先のURLを設定
-	 *
-	 * @param callbackUrl コールバック先のURL
-	 * @return this
-	 */
-	public CreateTimerRequest withCallbackUrl(String callbackUrl) {
-		setCallbackUrl(callbackUrl);
 		return this;
 	}
 

@@ -18,7 +18,9 @@ package io.gs2.timer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import io.gs2.model.Region;
 import io.gs2.util.EncodingUtil;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpDelete;
@@ -55,6 +57,190 @@ public class Gs2TimerClient extends AbstractGs2Client<Gs2TimerClient> {
 		super(credential);
 	}
 
+	/**
+	 * コンストラクタ。
+	 *
+	 * @param credential 認証情報
+	 * @param region リージョン
+	 */
+	public Gs2TimerClient(IGs2Credential credential, Region region) {
+		super(credential, region);
+	}
+
+	/**
+	 * コンストラクタ。
+	 *
+	 * @param credential 認証情報
+	 * @param region リージョン
+	 */
+	public Gs2TimerClient(IGs2Credential credential, String region) {
+		super(credential, region);
+	}
+
+
+	/**
+	 * タイマープールを新規作成します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public CreateTimerPoolResult createTimerPool(CreateTimerPoolRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("name", request.getName());
+        if(request.getDescription() != null) body.put("description", request.getDescription());
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/timerPool",
+				credential,
+				ENDPOINT,
+				CreateTimerPoolRequest.Constant.MODULE,
+				CreateTimerPoolRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(post, CreateTimerPoolResult.class);
+
+	}
+
+
+	/**
+	 * タイマープールを削除します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 */
+
+	public void deleteTimerPool(DeleteTimerPoolRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "";
+
+
+
+		HttpDelete delete = createHttpDelete(
+				url,
+				credential,
+				ENDPOINT,
+				DeleteTimerPoolRequest.Constant.MODULE,
+				DeleteTimerPoolRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		doRequest(delete, null);
+
+	}
+
+
+	/**
+	 * タイマープールの一覧を取得します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public DescribeTimerPoolResult describeTimerPool(DescribeTimerPoolRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool";
+
+        List<NameValuePair> queryString = new ArrayList<>();
+        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
+        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
+
+
+		if(queryString.size() > 0) {
+			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
+		}
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				DescribeTimerPoolRequest.Constant.MODULE,
+				DescribeTimerPoolRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, DescribeTimerPoolResult.class);
+
+	}
+
+
+	/**
+	 * タイマープールを取得します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public GetTimerPoolResult getTimerPool(GetTimerPoolRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				GetTimerPoolRequest.Constant.MODULE,
+				GetTimerPoolRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, GetTimerPoolResult.class);
+
+	}
+
+
+	/**
+	 * タイマープールを更新します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public UpdateTimerPoolResult updateTimerPool(UpdateTimerPoolRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode();
+        if(request.getDescription() != null) body.put("description", request.getDescription());
+		HttpPut put = createHttpPut(
+				Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "",
+				credential,
+				ENDPOINT,
+				UpdateTimerPoolRequest.Constant.MODULE,
+				UpdateTimerPoolRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            put.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(put, UpdateTimerPoolResult.class);
+
+	}
+
 
 	/**
 	 * タイマーを新規作成します<br>
@@ -82,9 +268,9 @@ public class Gs2TimerClient extends AbstractGs2Client<Gs2TimerClient> {
 				.put("callbackMethod", request.getCallbackMethod())
 				.put("callbackUrl", request.getCallbackUrl())
 				.put("executeTime", request.getExecuteTime());
-
         if(request.getCallbackBody() != null) body.put("callbackBody", request.getCallbackBody());
         if(request.getRetryMax() != null) body.put("retryMax", request.getRetryMax());
+
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "/timer",
 				credential,
@@ -98,39 +284,6 @@ public class Gs2TimerClient extends AbstractGs2Client<Gs2TimerClient> {
 
 
 		return doRequest(post, CreateTimerResult.class);
-
-	}
-
-
-	/**
-	 * タイマープールを新規作成します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public CreateTimerPoolResult createTimerPool(CreateTimerPoolRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("name", request.getName())
-				.put("description", request.getDescription());
-
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/timerPool",
-				credential,
-				ENDPOINT,
-				CreateTimerPoolRequest.Constant.MODULE,
-				CreateTimerPoolRequest.Constant.FUNCTION,
-				body.toString());
-        if(request.getRequestId() != null) {
-            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		return doRequest(post, CreateTimerPoolResult.class);
 
 	}
 
@@ -155,36 +308,6 @@ public class Gs2TimerClient extends AbstractGs2Client<Gs2TimerClient> {
 				ENDPOINT,
 				DeleteTimerRequest.Constant.MODULE,
 				DeleteTimerRequest.Constant.FUNCTION);
-        if(request.getRequestId() != null) {
-            delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		doRequest(delete, null);
-
-	}
-
-
-	/**
-	 * タイマープールを削除します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 */
-
-	public void deleteTimerPool(DeleteTimerPoolRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "";
-
-
-
-		HttpDelete delete = createHttpDelete(
-				url,
-				credential,
-				ENDPOINT,
-				DeleteTimerPoolRequest.Constant.MODULE,
-				DeleteTimerPoolRequest.Constant.FUNCTION);
         if(request.getRequestId() != null) {
             delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
@@ -234,44 +357,6 @@ public class Gs2TimerClient extends AbstractGs2Client<Gs2TimerClient> {
 
 
 	/**
-	 * タイマープールの一覧を取得します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public DescribeTimerPoolResult describeTimerPool(DescribeTimerPoolRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool";
-
-        List<NameValuePair> queryString = new ArrayList<>();
-        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
-        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
-
-
-		if(queryString.size() > 0) {
-			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
-		}
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				DescribeTimerPoolRequest.Constant.MODULE,
-				DescribeTimerPoolRequest.Constant.FUNCTION);
-        if(request.getRequestId() != null) {
-            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		return doRequest(get, DescribeTimerPoolResult.class);
-
-	}
-
-
-	/**
 	 * タイマーを取得します<br>
 	 * <br>
 	 *
@@ -299,70 +384,6 @@ public class Gs2TimerClient extends AbstractGs2Client<Gs2TimerClient> {
 
 
 		return doRequest(get, GetTimerResult.class);
-
-	}
-
-
-	/**
-	 * タイマープールを取得します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public GetTimerPoolResult getTimerPool(GetTimerPoolRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "";
-
-
-
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				GetTimerPoolRequest.Constant.MODULE,
-				GetTimerPoolRequest.Constant.FUNCTION);
-        if(request.getRequestId() != null) {
-            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		return doRequest(get, GetTimerPoolResult.class);
-
-	}
-
-
-	/**
-	 * タイマープールを更新します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public UpdateTimerPoolResult updateTimerPool(UpdateTimerPoolRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("description", request.getDescription());
-
-		HttpPut put = createHttpPut(
-				Gs2Constant.ENDPOINT_HOST + "/timerPool/" + (request.getTimerPoolName() == null || request.getTimerPoolName().equals("") ? "null" : request.getTimerPoolName()) + "",
-				credential,
-				ENDPOINT,
-				UpdateTimerPoolRequest.Constant.MODULE,
-				UpdateTimerPoolRequest.Constant.FUNCTION,
-				body.toString());
-        if(request.getRequestId() != null) {
-            put.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		return doRequest(put, UpdateTimerPoolResult.class);
 
 	}
 

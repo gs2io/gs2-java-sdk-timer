@@ -31,35 +31,35 @@ public class CreateTimerPoolRequest extends Gs2BasicRequest<CreateTimerPoolReque
 		public static final String FUNCTION = "CreateTimerPool";
 	}
 
-	/** タイマープールの名前 */
+	/** タイマープール名 */
 	private String name;
 
-	/** タイマープールの説明 */
+	/** 説明文 */
 	private String description;
 
 
 	/**
-	 * タイマープールの名前を取得
+	 * タイマープール名を取得
 	 *
-	 * @return タイマープールの名前
+	 * @return タイマープール名
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * タイマープールの名前を設定
+	 * タイマープール名を設定
 	 *
-	 * @param name タイマープールの名前
+	 * @param name タイマープール名
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * タイマープールの名前を設定
+	 * タイマープール名を設定
 	 *
-	 * @param name タイマープールの名前
+	 * @param name タイマープール名
 	 * @return this
 	 */
 	public CreateTimerPoolRequest withName(String name) {
@@ -68,27 +68,27 @@ public class CreateTimerPoolRequest extends Gs2BasicRequest<CreateTimerPoolReque
 	}
 
 	/**
-	 * タイマープールの説明を取得
+	 * 説明文を取得
 	 *
-	 * @return タイマープールの説明
+	 * @return 説明文
 	 */
 	public String getDescription() {
 		return description;
 	}
 
 	/**
-	 * タイマープールの説明を設定
+	 * 説明文を設定
 	 *
-	 * @param description タイマープールの説明
+	 * @param description 説明文
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
-	 * タイマープールの説明を設定
+	 * 説明文を設定
 	 *
-	 * @param description タイマープールの説明
+	 * @param description 説明文
 	 * @return this
 	 */
 	public CreateTimerPoolRequest withDescription(String description) {

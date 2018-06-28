@@ -30,33 +30,141 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Timer implements Serializable {
 
+	/** タイマーGRN */
+	private String timerId;
+
+	/** オーナーID */
+	private String ownerId;
+
+	/** タイマープールGRN */
+	private String timerPoolId;
+
+	/** コールバックHTTPメソッド */
+	private String callbackMethod;
+
+	/** コールバックURL */
+	private String callbackUrl;
+
+	/** コールバックボディ(PUT/POSTのときのみ有効) */
+	private String callbackBody;
+
 	/** コールバック時間(エポック秒) */
 	private Integer executeTime;
 
 	/** 最大リトライ回数 */
 	private Integer retryMax;
 
-	/** コールバックHTTPメソッド */
-	private String callbackMethod;
-
 	/** 作成日時(エポック秒) */
 	private Integer createAt;
 
-	/** タイマープールGRN */
-	private String timerPoolId;
 
-	/** オーナーID */
-	private String ownerId;
+	/**
+	 * タイマーGRNを取得
+	 *
+	 * @return タイマーGRN
+	 */
+	public String getTimerId() {
+		return timerId;
+	}
 
-	/** タイマーGRN */
-	private String timerId;
+	/**
+	 * タイマーGRNを設定
+	 *
+	 * @param timerId タイマーGRN
+	 */
+	public void setTimerId(String timerId) {
+		this.timerId = timerId;
+	}
 
-	/** コールバックボディ(PUT/POSTのときのみ有効) */
-	private String callbackBody;
+	/**
+	 * オーナーIDを取得
+	 *
+	 * @return オーナーID
+	 */
+	public String getOwnerId() {
+		return ownerId;
+	}
 
-	/** コールバックURL */
-	private String callbackUrl;
+	/**
+	 * オーナーIDを設定
+	 *
+	 * @param ownerId オーナーID
+	 */
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
+	}
 
+	/**
+	 * タイマープールGRNを取得
+	 *
+	 * @return タイマープールGRN
+	 */
+	public String getTimerPoolId() {
+		return timerPoolId;
+	}
+
+	/**
+	 * タイマープールGRNを設定
+	 *
+	 * @param timerPoolId タイマープールGRN
+	 */
+	public void setTimerPoolId(String timerPoolId) {
+		this.timerPoolId = timerPoolId;
+	}
+
+	/**
+	 * コールバックHTTPメソッドを取得
+	 *
+	 * @return コールバックHTTPメソッド
+	 */
+	public String getCallbackMethod() {
+		return callbackMethod;
+	}
+
+	/**
+	 * コールバックHTTPメソッドを設定
+	 *
+	 * @param callbackMethod コールバックHTTPメソッド
+	 */
+	public void setCallbackMethod(String callbackMethod) {
+		this.callbackMethod = callbackMethod;
+	}
+
+	/**
+	 * コールバックURLを取得
+	 *
+	 * @return コールバックURL
+	 */
+	public String getCallbackUrl() {
+		return callbackUrl;
+	}
+
+	/**
+	 * コールバックURLを設定
+	 *
+	 * @param callbackUrl コールバックURL
+	 */
+	public void setCallbackUrl(String callbackUrl) {
+		this.callbackUrl = callbackUrl;
+	}
+
+	/**
+	 * コールバックボディ(PUT/POSTのときのみ有効)を取得
+	 *
+	 * @return コールバックボディ(PUT/POSTのときのみ有効)
+	 */
+	public String getCallbackBody() {
+		return callbackBody;
+	}
+
+	/**
+	 * コールバックボディ(PUT/POSTのときのみ有効)を設定
+	 *
+	 * @param callbackBody コールバックボディ(PUT/POSTのときのみ有効)
+	 */
+	public void setCallbackBody(String callbackBody) {
+		this.callbackBody = callbackBody;
+	}
 
 	/**
 	 * コールバック時間(エポック秒)を取得
@@ -95,24 +203,6 @@ public class Timer implements Serializable {
 	}
 
 	/**
-	 * コールバックHTTPメソッドを取得
-	 *
-	 * @return コールバックHTTPメソッド
-	 */
-	public String getCallbackMethod() {
-		return callbackMethod;
-	}
-
-	/**
-	 * コールバックHTTPメソッドを設定
-	 *
-	 * @param callbackMethod コールバックHTTPメソッド
-	 */
-	public void setCallbackMethod(String callbackMethod) {
-		this.callbackMethod = callbackMethod;
-	}
-
-	/**
 	 * 作成日時(エポック秒)を取得
 	 *
 	 * @return 作成日時(エポック秒)
@@ -128,96 +218,6 @@ public class Timer implements Serializable {
 	 */
 	public void setCreateAt(Integer createAt) {
 		this.createAt = createAt;
-	}
-
-	/**
-	 * タイマープールGRNを取得
-	 *
-	 * @return タイマープールGRN
-	 */
-	public String getTimerPoolId() {
-		return timerPoolId;
-	}
-
-	/**
-	 * タイマープールGRNを設定
-	 *
-	 * @param timerPoolId タイマープールGRN
-	 */
-	public void setTimerPoolId(String timerPoolId) {
-		this.timerPoolId = timerPoolId;
-	}
-
-	/**
-	 * オーナーIDを取得
-	 *
-	 * @return オーナーID
-	 */
-	public String getOwnerId() {
-		return ownerId;
-	}
-
-	/**
-	 * オーナーIDを設定
-	 *
-	 * @param ownerId オーナーID
-	 */
-	public void setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
-	}
-
-	/**
-	 * タイマーGRNを取得
-	 *
-	 * @return タイマーGRN
-	 */
-	public String getTimerId() {
-		return timerId;
-	}
-
-	/**
-	 * タイマーGRNを設定
-	 *
-	 * @param timerId タイマーGRN
-	 */
-	public void setTimerId(String timerId) {
-		this.timerId = timerId;
-	}
-
-	/**
-	 * コールバックボディ(PUT/POSTのときのみ有効)を取得
-	 *
-	 * @return コールバックボディ(PUT/POSTのときのみ有効)
-	 */
-	public String getCallbackBody() {
-		return callbackBody;
-	}
-
-	/**
-	 * コールバックボディ(PUT/POSTのときのみ有効)を設定
-	 *
-	 * @param callbackBody コールバックボディ(PUT/POSTのときのみ有効)
-	 */
-	public void setCallbackBody(String callbackBody) {
-		this.callbackBody = callbackBody;
-	}
-
-	/**
-	 * コールバックURLを取得
-	 *
-	 * @return コールバックURL
-	 */
-	public String getCallbackUrl() {
-		return callbackUrl;
-	}
-
-	/**
-	 * コールバックURLを設定
-	 *
-	 * @param callbackUrl コールバックURL
-	 */
-	public void setCallbackUrl(String callbackUrl) {
-		this.callbackUrl = callbackUrl;
 	}
 
 }

@@ -30,77 +30,41 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TimerPool implements Serializable {
 
-	/** 作成日時(エポック秒) */
-	private Integer createAt;
-
-	/** 説明文 */
-	private String description;
-
-	/** タイマープール名 */
-	private String name;
+	/** タイマープールGRN */
+	private String timerPoolId;
 
 	/** オーナーID */
 	private String ownerId;
 
+	/** タイマープール名 */
+	private String name;
+
+	/** 説明文 */
+	private String description;
+
+	/** 作成日時(エポック秒) */
+	private Integer createAt;
+
 	/** 最終更新日時(エポック秒) */
 	private Integer updateAt;
 
-	/** タイマープールGRN */
-	private String timerPoolId;
-
 
 	/**
-	 * 作成日時(エポック秒)を取得
+	 * タイマープールGRNを取得
 	 *
-	 * @return 作成日時(エポック秒)
+	 * @return タイマープールGRN
 	 */
-	public Integer getCreateAt() {
-		return createAt;
+	public String getTimerPoolId() {
+		return timerPoolId;
 	}
 
 	/**
-	 * 作成日時(エポック秒)を設定
+	 * タイマープールGRNを設定
 	 *
-	 * @param createAt 作成日時(エポック秒)
+	 * @param timerPoolId タイマープールGRN
 	 */
-	public void setCreateAt(Integer createAt) {
-		this.createAt = createAt;
-	}
-
-	/**
-	 * 説明文を取得
-	 *
-	 * @return 説明文
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * 説明文を設定
-	 *
-	 * @param description 説明文
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
-	 * タイマープール名を取得
-	 *
-	 * @return タイマープール名
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * タイマープール名を設定
-	 *
-	 * @param name タイマープール名
-	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setTimerPoolId(String timerPoolId) {
+		this.timerPoolId = timerPoolId;
 	}
 
 	/**
@@ -122,6 +86,60 @@ public class TimerPool implements Serializable {
 	}
 
 	/**
+	 * タイマープール名を取得
+	 *
+	 * @return タイマープール名
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * タイマープール名を設定
+	 *
+	 * @param name タイマープール名
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * 説明文を取得
+	 *
+	 * @return 説明文
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * 説明文を設定
+	 *
+	 * @param description 説明文
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * 作成日時(エポック秒)を取得
+	 *
+	 * @return 作成日時(エポック秒)
+	 */
+	public Integer getCreateAt() {
+		return createAt;
+	}
+
+	/**
+	 * 作成日時(エポック秒)を設定
+	 *
+	 * @param createAt 作成日時(エポック秒)
+	 */
+	public void setCreateAt(Integer createAt) {
+		this.createAt = createAt;
+	}
+
+	/**
 	 * 最終更新日時(エポック秒)を取得
 	 *
 	 * @return 最終更新日時(エポック秒)
@@ -137,24 +155,6 @@ public class TimerPool implements Serializable {
 	 */
 	public void setUpdateAt(Integer updateAt) {
 		this.updateAt = updateAt;
-	}
-
-	/**
-	 * タイマープールGRNを取得
-	 *
-	 * @return タイマープールGRN
-	 */
-	public String getTimerPoolId() {
-		return timerPoolId;
-	}
-
-	/**
-	 * タイマープールGRNを設定
-	 *
-	 * @param timerPoolId タイマープールGRN
-	 */
-	public void setTimerPoolId(String timerPoolId) {
-		this.timerPoolId = timerPoolId;
 	}
 
 }
